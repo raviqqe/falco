@@ -39,8 +39,9 @@ impl<'a> CachedExternalPackageDownloader<'a> {
 
         if !self.file_system.exists(&directory_path) {
             self.logger.log(&format!(
-                "downloading package {} {}",
+                "downloading package {} {} {}",
                 external_package.name(),
+                external_package.url(),
                 external_package.version()
             ))?;
 

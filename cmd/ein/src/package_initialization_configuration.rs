@@ -1,13 +1,13 @@
 use once_cell::sync::Lazy;
 
 pub static DEFAULT_SYSTEM_PACKAGE_CONFIGURATION: Lazy<app::ExternalPackage> =
-    Lazy::new(|| app::ExternalPackage::new("github.com/ein-lang/os", "main"));
+    Lazy::new(|| app::ExternalPackage::new("Os", "github.com/ein-lang/os", "main"));
 
 pub static PACKAGE_INITIALIZATION_CONFIGURATION: app::PackageInitializationConfiguration =
     app::PackageInitializationConfiguration {
         application_main_file_content: indoc::indoc!(
             "
-            import \"github.com/ein-lang/os/Os\"
+            import Os.Os
 
             main : Os.Os -> Number
             main os =

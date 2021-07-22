@@ -3,12 +3,20 @@ use std::ops::Deref;
 
 #[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
 pub struct ExternalUnresolvedModulePath {
+    package_name: String,
     components: Vec<String>,
 }
 
 impl ExternalUnresolvedModulePath {
-    pub fn new(components: Vec<String>) -> Self {
-        Self { components }
+    pub fn new(package_name: impl Into<String>, components: Vec<String>) -> Self {
+        Self {
+            package_name: package_name.into(),
+            components,
+        }
+    }
+
+    pub fn package_name(&self) -> &str {
+        &self.package_name
     }
 
     pub fn components(&self) -> impl Iterator<Item = &str> {

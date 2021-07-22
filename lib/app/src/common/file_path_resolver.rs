@@ -68,10 +68,7 @@ impl<'a> FilePathResolver<'a> {
         self.static_file_path_manager
             .external_packages_directory_path()
             .join(
-                &external_package
-                    .name()
-                    .parse::<FilePath>()
-                    .unwrap()
+                &FilePath::new(&[external_package.name()])
                     .join(&FilePath::new(&[external_package.version()])),
             )
     }

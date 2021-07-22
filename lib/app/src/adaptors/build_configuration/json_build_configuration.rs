@@ -34,6 +34,7 @@ impl JsonBuildConfiguration {
                     application.name(),
                     JsonSystemPackageConfiguration::new(
                         application.system_package().name(),
+                        application.system_package().url(),
                         application.system_package().version(),
                     ),
                 )),
@@ -45,7 +46,10 @@ impl JsonBuildConfiguration {
                 .map(|external_package| {
                     (
                         external_package.name().into(),
-                        JsonExternalPackageConfiguration::new(external_package.version()),
+                        JsonExternalPackageConfiguration::new(
+                            external_package.url(),
+                            external_package.version(),
+                        ),
                     )
                 })
                 .collect(),
@@ -61,6 +65,7 @@ impl JsonBuildConfiguration {
                         application.name(),
                         ExternalPackage::new(
                             application.system().name(),
+                            application.system().url(),
                             application.system().version(),
                         ),
                     )
@@ -69,7 +74,9 @@ impl JsonBuildConfiguration {
                 .unwrap_or(Target::Library),
             self.dependencies
                 .iter()
-                .map(|(name, configuration)| ExternalPackage::new(name, configuration.version()))
+                .map(|(name, configuration)| {
+                    ExternalPackage::new(name, configuration.url(), configuration.version())
+                })
                 .collect(),
         )
     }

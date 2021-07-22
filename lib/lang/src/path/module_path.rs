@@ -66,14 +66,7 @@ impl ModulePath {
     }
 
     pub fn external_unresolved(&self) -> ExternalUnresolvedModulePath {
-        ExternalUnresolvedModulePath::new(
-            self.package
-                .name()
-                .split('/')
-                .chain(self.components.iter().map(Deref::deref))
-                .map(String::from)
-                .collect(),
-        )
+        ExternalUnresolvedModulePath::new(self.package.name(), self.components.to_vec())
     }
 }
 

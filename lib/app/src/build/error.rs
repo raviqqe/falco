@@ -53,9 +53,8 @@ impl std::fmt::Display for BuildError {
             }
             Self::PackageCircularDependency(external_package) => write!(
                 formatter,
-                "circular package dependency detected: {} {}",
+                "circular package dependency detected: {}",
                 external_package.name(),
-                external_package.version()
             ),
         }
     }

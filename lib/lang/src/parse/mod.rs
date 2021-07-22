@@ -144,7 +144,7 @@ mod tests {
             parse(
                 indoc!(
                     "
-                    import \"package/Module\"
+                    import Package.Module
 
                     main : Number -> Number
                     main x = x
@@ -156,7 +156,8 @@ mod tests {
                 Export::new(Default::default()),
                 ExportForeign::new(Default::default()),
                 vec![UnresolvedImport::new(ExternalUnresolvedModulePath::new(
-                    vec!["package".into(), "Module".into()]
+                    "Package",
+                    vec!["Module".into()]
                 ))],
                 vec![],
                 vec![],
